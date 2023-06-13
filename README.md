@@ -48,7 +48,9 @@ typedef struct  s_philo
     pthread_t       id;
     pthread_mutex_t mutex;
     int             fork;
-    int             time;
+    int             time_last_meal;
+    int             time_eat_started;
+    int             status;
 
     // Reference to global rules
     t_data          *data;
@@ -89,6 +91,8 @@ void    ft_initialization(t_data *data)
     {
         philo = (t_philo  *)malloc(sizeof(t_philo));
         philo->fork = 0;
+        philo->status = 0;
+        philo->times = 0;
         temp = ft_lstnew(philo, i + 1);
         ft_lstadd_back(*philos, temp);
         i++;
@@ -143,9 +147,45 @@ def take_fork(philo) -> int:
         return -1
     if take_right() is fail:
         return -1
-    print("`the philo {i} took the forks")
 
 def take_left(philo):
     if (philo.fork != 0)
+        ft_think(philo, philo.left)
+    else
+        mutex_lock(mutex)
+        philo.fork += 1
 
+def take_right(philo):
+    if (philo.right.fork != 0)
+        ft_think(philo, philo.right)
+    else
+        mutex_lock(right.mutex)
+        philo.right.fork += 1
 ```
+
+```python 3
+def ft_think(philo, philo2) -> int:
+    int time_available = 0
+    int time_needed = 0
+
+    
+    # The example:
+    # ----------------
+    # 1. [0.10.00]    - last time I eat
+    # 2. [0.14.00]    - current time
+    # 3. 4ms          - Time since the last meal
+    # 3. 5ms          - time to die
+    time_available =    philo.game.time_die
+                            - (philo.last_meal - current_time) 
+    time_needed =       philo.game.time_eat
+                            - (current_time - philo2.eat_started)
+    
+    # I have 2 secs remaining, but my mate will still eat for 3 sec 
+    if (time_available - time_needed < 0)
+        sleep(time_needed - time_available)
+        die()
+    else
+        print("I am thinking!!!")
+        sleep(time_needed)
+```
+- What if I have negative time, do I have  to die?
