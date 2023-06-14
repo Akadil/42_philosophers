@@ -3,7 +3,8 @@ This project is about learning the basics of threading a process
 
 # Planning period
 
-### Main function
+## Main function
+Very simple. Just do the parsing and  then create the threads
 ```c
 def main:
     t_list   *t1;
@@ -26,12 +27,15 @@ def main:
 - In ft_close_threads(), free the philos and free the mutex 
 
 <br>
+<br>
 
-### Data structure
+## Data structure
+The data are going to be stored inside of linked list. Where void *content, points to the t_philo structure
+- t_data: general game rules
+- t_philo: Philo's structure
 ```c
 typedef struct s_data
 {
-    // General game rules
     int num;
     int time_die;
     int time_sleep;
@@ -48,9 +52,9 @@ typedef struct  s_philo
     pthread_t       id;
     pthread_mutex_t mutex;
     int             fork;
-    int             time_last_meal;
     int             time_eat_started;
     int             status;
+    int             round;
 
     // Reference to global rules
     t_data          *data;
@@ -92,7 +96,8 @@ void    ft_initialization(t_data *data)
         philo = (t_philo  *)malloc(sizeof(t_philo));
         philo->fork = 0;
         philo->status = 0;
-        philo->times = 0;
+        philo->times* = 0;
+        philo->round = 1;
         temp = ft_lstnew(philo, i + 1);
         ft_lstadd_back(*philos, temp);
         i++;
@@ -143,11 +148,33 @@ void    *routine(t_list *philo)
 
 ```python 3
 def take_fork(philo) -> int:
+    
+    # If the philo has to wait this round, it has to sleep
+    while (not your turn)
+        ft_think(time_eat) # Wait other philos eating
+    # In this scenario, I have to also consider that he might die while waiting. 
+
+    # Once I am here, I can start taking my stuff
     if take_left() is fail:
         return -1
     if take_right() is fail:
         return -1
 
+def is_my_turn(philo):
+    int num
+
+    pos_host = philo.round % philo.game.num_philo
+    while (i < num_iter)
+    {
+        if (philo.num == pos_host)
+            return True
+        pos_host += 2
+    }
+    return False
+```
+
+
+```python 3
 def take_left(philo):
     if (philo.fork != 0)
         ft_think(philo, philo.left)
@@ -176,16 +203,38 @@ def ft_think(philo, philo2) -> int:
     # 3. 4ms          - Time since the last meal
     # 3. 5ms          - time to die
     time_available =    philo.game.time_die
-                            - (philo.last_meal - current_time) 
+                            - (philo.eat_started - current_time) 
     time_needed =       philo.game.time_eat
-                            - (current_time - philo2.eat_started)
     
     # I have 2 secs remaining, but my mate will still eat for 3 sec 
     if (time_available - time_needed < 0)
         sleep(time_needed - time_available)
         die()
+        return -1
     else
         print("I am thinking!!!")
         sleep(time_needed)
+```
+
+```python 3
+def ft_eat():
+    if (time passed)
+        unlock(mutexes)
+        die()
+        return -1
+    print("Philo is eating")
+    update_time(philo.last_meal)
+    sleep(time_eat)
+```
+
+```python 3
+def sleep():
+    if (enough time):
+        sleep(time_sleep)
+        print(sleep)
+    else:
+        sleep(till he has a time)
+        die()
+        return -1
 ```
 - What if I have negative time, do I have  to die?
