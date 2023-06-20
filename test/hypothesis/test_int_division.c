@@ -1,12 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   test_int_division.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akadilkalimoldayev <akadilkalimoldayev@    +#+  +:+       +#+        */
+/*   By: akalimol <akalimol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/08 17:40:06 by akadilkalim       #+#    #+#             */
-/*   Updated: 2023/06/08 17:40:07 by akadilkalim      ###   ########.fr       */
+/*   Created: 2023/06/20 15:10:35 by akalimol          #+#    #+#             */
+/*   Updated: 2023/06/20 15:12:01 by akalimol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
+
+int main(void)
+{
+    int a = 7;
+    int b = 2;
+    int c;
+
+    c = a / b;
+    printf("%d\n", c);
+    return (0);
+}
