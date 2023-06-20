@@ -6,7 +6,7 @@
 /*   By: akalimol <akalimol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 15:15:02 by akalimol          #+#    #+#             */
-/*   Updated: 2023/06/20 16:59:19 by akalimol         ###   ########.fr       */
+/*   Updated: 2023/06/20 17:45:14 by akalimol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,9 @@ int ft_think(t_philo *philo)
     time_curr = ft_get_time();
     if (time_curr == -1)
         return (-2);
-    time_passed = philo->time - time_curr;
-    time_available = philo->rules->time_die - time_passed;
+    time_available = ft_time_available(philo);
+    if (time_available == -2)
+        return (-2);
     if (philo->rules->time_eat - time_available < 0)
     {
         if (usleep_alt((time_available - philo->rules->time_eat) * 1000, philo) != 0)
