@@ -14,6 +14,7 @@ void* routine() {
         // increment
         // write mails
     }
+    return (NULL);
 }
 
 int main(int argc, char* argv[]) {

@@ -1,32 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_error_2.c                                       :+:      :+:    :+:   */
+/*   test_if_negative.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akalimol <akalimol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/16 15:30:27 by akalimol          #+#    #+#             */
-/*   Updated: 2023/05/31 19:23:40 by akalimol         ###   ########.fr       */
+/*   Created: 2023/06/21 12:02:40 by akalimol          #+#    #+#             */
+/*   Updated: 2023/06/21 12:06:02 by akalimol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_clean.h"
-#include "ft_error.h"
+#include <stdio.h>
 
-void	ft_error_exit(int exit_code)
+int function();
+
+/*
+    How does if condition respond to function return value
+
+    Result: "Inside"
+    
+    Conclusion: if function itself in the if condition statement, then only 
+                0 will give false result
+*/
+int main(void)
 {
-	ft_error();
-	exit(exit_code);
+    if (function())
+        printf("Inside\n");
+    else
+        printf("Outside\n");
+    return (0);
 }
 
-void	ft_perror_exit(char *str, int exit_code)
+int function()
 {
-	ft_perror(str);
-	exit(exit_code);
-}
-
-void	ft_merror_exit(char *str, char *param, int exit_code)
-{
-	ft_merror(str, param);
-	exit(exit_code);
+    return (-1);
 }

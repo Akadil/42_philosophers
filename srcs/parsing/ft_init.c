@@ -1,20 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_initialization.c                                :+:      :+:    :+:   */
+/*   ft_init.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akalimol <akalimol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 11:20:57 by akalimol          #+#    #+#             */
-/*   Updated: 2023/06/20 12:36:41 by akalimol         ###   ########.fr       */
+/*   Updated: 2023/06/21 23:28:00 by akalimol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "struct_rules.h"
-#include "struct_philo.h"
-#include <stdio.h>
+#include "includes/ft_init.h"
 
-t_philo *ft_initialization(t_rules *rules)
+t_philo *ft_init(t_rules *rules)
 {
     t_philo *philo;
     t_philo *temp;
@@ -26,27 +24,33 @@ t_philo *ft_initialization(t_rules *rules)
     {
         temp = (t_philo *)malloc(sizeof(t_philo));
         if (!temp)
-            ft_error_clean_exit(philo);
+            return (ft_error_clean_exit(philo), NULL);
+        if (pthread_mutex_init(&temp->mutex, NULL) != 0)
+            return (free (temp), ft_error_clean_exit(philo), NULL);
         temp->num = i + 1;
         temp->round = 1;
         temp->prev = NULL;
         temp->next = NULL;
-        ft_lstadd_back_alt(*philo, temp);
+        temp->status = 0;
+        temp->success = rules->num_success;
+        temp->rules = rules;
+        ft_lstadd_back_alt(&philo, temp);
         i++;
     }
-    i = 0;
-    temp = philo;
-    while (i < rules->num_philo)
-    {
-        pthread_mutex_init(&temp->mutex, NULL);
-        temp = temp->next;
-        i++;
-    }
-    temp = ft_lstlast_alt(philo);
-    if (!temp)
-    {
-        temp->next = philo;
-        philo->prev = temp;
-    }
+    ft_connect_first_last(philo);
     return (philo);
+}
+
+void    ft_connect_first_last(t_philo *philo)
+{
+    t_philo *last;
+
+    pthread_mutex_init(&philo->rules->time_of_day, NULL);
+    pthread_mutex_init(&philo->rules->time_available, NULL);
+    pthread_mutex_init(&philo->rules->my_turn, NULL);
+    if (!philo)
+        return ;
+    last = ft_lstlast_alt(philo);
+    philo->prev = last;
+    last->next = philo;
 }

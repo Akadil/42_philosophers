@@ -1,28 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test_int_division.c                                :+:      :+:    :+:   */
+/*   test_mult_declaration_2.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akalimol <akalimol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/20 15:10:35 by akalimol          #+#    #+#             */
-/*   Updated: 2023/06/21 12:06:26 by akalimol         ###   ########.fr       */
+/*   Created: 2023/06/21 17:45:34 by akalimol          #+#    #+#             */
+/*   Updated: 2023/06/21 17:46:07 by akalimol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 
-/*
-    Check the division operators
-*/
+void    ft_function(void);
 
-int main(void)
+void    ft_other_file(void)
 {
-    int a = 7;
-    int b = 2;
-    int c;
-
-    c = a / b;
-    printf("%d\n", c);
-    return (0);
+    ft_function();
 }

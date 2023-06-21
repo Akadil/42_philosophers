@@ -6,13 +6,11 @@
 /*   By: akalimol <akalimol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 17:40:06 by akadilkalim       #+#    #+#             */
-/*   Updated: 2023/06/20 14:29:13 by akalimol         ###   ########.fr       */
+/*   Updated: 2023/06/21 20:46:56 by akalimol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "struct_philo.h"
-#include "struct_rules.h"
+#include "ft_main.h"
 
 int main(int argc, char **argv)
 {
@@ -20,16 +18,15 @@ int main(int argc, char **argv)
     t_rules   rules;
     int      i;
 
-    philo = NULL;
     ft_parsing(argc, argv, &rules);
-    ft_initialization(philo, &rule);
+    philo = ft_init(&rules);
     i = 0;
-    while (i < rule.num_philo)
+    while (i < rules.num_philo)
     {
-        pthread_create(&philo->id, NULL, &ft_routine, philo);
+        if (pthread_create(&philo->id, NULL, &ft_routine, philo) != 0)
+            break ;
         philo = philo->next;
         i++;
     }
-    ft_close_threads();
-    return (0);
+    return (ft_close_threads(philo, &rules, i));
 }

@@ -6,38 +6,40 @@
 /*   By: akalimol <akalimol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 14:29:54 by akalimol          #+#    #+#             */
-/*   Updated: 2023/06/20 16:42:28 by akalimol         ###   ########.fr       */
+/*   Updated: 2023/06/22 00:57:09 by akalimol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "struct_philo.h"
-#include <sys/time.h>
+#include "includes/ft_routine.h"
 #include <stdio.h>
 
-int ft_get_time();
-int ft_fork(t_philo *philo);
-int ft_eat(t_philo *philo);
-int ft_sleep(t_philo *philo);
-
+// I have a problem for the last one. My second philo waiting for status changing. 
+// but it is not because of line 38
 void    *ft_routine(void *arg)
 {
     t_philo *philo;
 
     philo = (t_philo *)arg;
-    philo->time = ft_get_time();
-    if (philo->time == -1)
-    {
-        philo->rules->status_code = -2;
-        return (NULL);
-    }
+    if (ft_get_time_beginning(philo) == -1)
+        return (ft_set_status(philo, -2), NULL);
+    philo->rules->time_start = philo->time_eat;
     while (1)
     {
-        if (ft_fork(philo) != 0)
+        philo->exit_code = ft_fork(philo);
+        if (philo->exit_code != 0)
             break;
-        if (ft_eat(philo) != 0)
+        philo->exit_code = ft_eat(philo); 
+        pthread_mutex_unlock(&philo->mutex);
+		pthread_mutex_unlock(&philo->next->mutex);
+		if (philo->exit_code != 0)
             break;
-        if (ft_sleep(philo) != 0)
+        philo->success--;
+        if (philo->success == 0)
             break;
+        philo->exit_code = ft_sleep(philo); 
+        if (philo->exit_code != 0)
+            break;
+        philo->round++;
     }
-    return (NULL);
+    return (ft_handle_error(philo), NULL);
 }

@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test_int_division.c                                :+:      :+:    :+:   */
+/*   ft_usleep_alt.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akalimol <akalimol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/20 15:10:35 by akalimol          #+#    #+#             */
-/*   Updated: 2023/06/21 12:06:26 by akalimol         ###   ########.fr       */
+/*   Created: 2023/06/21 14:37:46 by akalimol          #+#    #+#             */
+/*   Updated: 2023/06/22 00:14:15 by akalimol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include <unistd.h>
+#include "struct_philo.h"
 
-/*
-    Check the division operators
-*/
-
-int main(void)
+int usleep_alt(t_philo *philo)
 {
-    int a = 7;
-    int b = 2;
-    int c;
-
-    c = a / b;
-    printf("%d\n", c);
+    while (philo->time_skip > 10000)
+    {
+        if (usleep(10000) == -1)
+            return (-2);
+        if (philo->rules->status_code != 0)
+            return (-3);
+        philo->time_skip -= 10000;
+    }
+    if (philo->time_skip > 0 && usleep(philo->time_skip) == -1)
+        return (-2);
     return (0);
 }

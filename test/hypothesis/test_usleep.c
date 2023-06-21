@@ -1,28 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test_int_division.c                                :+:      :+:    :+:   */
+/*   test_usleep.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akalimol <akalimol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/20 15:10:35 by akalimol          #+#    #+#             */
-/*   Updated: 2023/06/21 12:06:26 by akalimol         ###   ########.fr       */
+/*   Created: 2023/06/21 22:56:55 by akalimol          #+#    #+#             */
+/*   Updated: 2023/06/21 22:58:04 by akalimol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <unistd.h>
 #include <stdio.h>
-
-/*
-    Check the division operators
-*/
 
 int main(void)
 {
-    int a = 7;
-    int b = 2;
-    int c;
-
-    c = a / b;
-    printf("%d\n", c);
-    return (0);
+    printf("Hey!\n");
+    usleep(3000000);
+    printf("Whatsup!\n");
 }

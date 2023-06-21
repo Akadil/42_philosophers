@@ -1,28 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test_int_division.c                                :+:      :+:    :+:   */
+/*   ft_lst_alt.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akalimol <akalimol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/20 15:10:35 by akalimol          #+#    #+#             */
-/*   Updated: 2023/06/21 12:06:26 by akalimol         ###   ########.fr       */
+/*   Created: 2023/06/21 15:17:42 by akalimol          #+#    #+#             */
+/*   Updated: 2023/06/21 15:18:15 by akalimol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "struct_philo.h"
 #include <stdio.h>
 
-/*
-    Check the division operators
-*/
-
-int main(void)
+t_philo *ft_lstlast_alt(t_philo *philo)
 {
-    int a = 7;
-    int b = 2;
-    int c;
+    if (!philo)
+        return (NULL);
+    while (philo->next)
+        philo = philo->next;
+    return (philo);
+}
 
-    c = a / b;
-    printf("%d\n", c);
-    return (0);
+void    ft_lstadd_back_alt(t_philo **head, t_philo *philo)
+{
+    t_philo *last;
+
+    last = ft_lstlast_alt(*head);
+    if (!last)
+        *head = philo;
+    else
+    {
+        last->next = philo;
+        philo->prev = last;
+    }
 }

@@ -1,28 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test_int_division.c                                :+:      :+:    :+:   */
+/*   exit_code.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akalimol <akalimol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/20 15:10:35 by akalimol          #+#    #+#             */
-/*   Updated: 2023/06/21 12:06:26 by akalimol         ###   ########.fr       */
+/*   Created: 2023/06/21 11:01:05 by akalimol          #+#    #+#             */
+/*   Updated: 2023/06/21 11:02:51 by akalimol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#ifndef EXIT_CODE_H
+# define EXIT_CODE_H
 
-/*
-    Check the division operators
-*/
+# define OK 0
+# define PHILO_DIED -1
+# define PROG_FAILED -2
+# define FORCED_QUIT -3
 
-int main(void)
-{
-    int a = 7;
-    int b = 2;
-    int c;
-
-    c = a / b;
-    printf("%d\n", c);
-    return (0);
-}
+#endif

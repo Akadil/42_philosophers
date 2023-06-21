@@ -1,28 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test_int_division.c                                :+:      :+:    :+:   */
+/*   test_mult_declaration_1.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akalimol <akalimol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/20 15:10:35 by akalimol          #+#    #+#             */
-/*   Updated: 2023/06/21 12:06:26 by akalimol         ###   ########.fr       */
+/*   Created: 2023/06/21 17:43:52 by akalimol          #+#    #+#             */
+/*   Updated: 2023/06/21 17:47:09 by akalimol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 
-/*
-    Check the division operators
-*/
+void    ft_function(void);
+void    ft_other_file(void);
 
+/*
+    Can I have multiple definition of one function across several files?
+
+    Result:     Yes, I can do it
+*/
 int main(void)
 {
-    int a = 7;
-    int b = 2;
-    int c;
-
-    c = a / b;
-    printf("%d\n", c);
+    ft_function();
+    ft_other_file();
     return (0);
+}
+
+void    ft_function(void)
+{
+    printf("Hello world!\n");
 }

@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test_int_division.c                                :+:      :+:    :+:   */
+/*   ft_init.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akalimol <akalimol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/20 15:10:35 by akalimol          #+#    #+#             */
-/*   Updated: 2023/06/21 12:06:26 by akalimol         ###   ########.fr       */
+/*   Created: 2023/06/21 15:18:48 by akalimol          #+#    #+#             */
+/*   Updated: 2023/06/21 15:47:03 by akalimol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#ifndef FT_INIT_H
+# define FT_INIT_H
 
-/*
-    Check the division operators
-*/
+# include "struct_rules.h"
+# include "struct_philo.h"
+# include "ft_error.h"
+# include <stdio.h>
+# include <stdlib.h>
+# include <pthread.h>
 
-int main(void)
-{
-    int a = 7;
-    int b = 2;
-    int c;
+t_philo *ft_lstlast_alt(t_philo *philo);
+void    ft_lstadd_back_alt(t_philo **head, t_philo *philo);
+void    ft_connect_first_last(t_philo *philo);
 
-    c = a / b;
-    printf("%d\n", c);
-    return (0);
-}
+#endif

@@ -1,28 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test_int_division.c                                :+:      :+:    :+:   */
+/*   ft_clean.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akalimol <akalimol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/20 15:10:35 by akalimol          #+#    #+#             */
-/*   Updated: 2023/06/21 12:06:26 by akalimol         ###   ########.fr       */
+/*   Created: 2023/06/21 15:36:41 by akalimol          #+#    #+#             */
+/*   Updated: 2023/06/21 17:24:32 by akalimol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#ifndef FT_CLEAN_H
+# define FT_CLEAN_H
 
-/*
-    Check the division operators
-*/
+# include "struct_philo.h"
 
-int main(void)
-{
-    int a = 7;
-    int b = 2;
-    int c;
+void	ft_clean(t_philo *philo);
+void	ft_clean_alt(t_philo *philo, int pos);
 
-    c = a / b;
-    printf("%d\n", c);
-    return (0);
-}
+#endif

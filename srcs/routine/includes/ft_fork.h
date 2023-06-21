@@ -1,38 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_clean_2.c                                       :+:      :+:    :+:   */
+/*   ft_fork.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akalimol <akalimol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/31 19:15:04 by akalimol          #+#    #+#             */
-/*   Updated: 2023/05/31 19:23:56 by akalimol         ###   ########.fr       */
+/*   Created: 2023/06/21 16:21:42 by akalimol          #+#    #+#             */
+/*   Updated: 2023/06/21 20:27:52 by akalimol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "struct_data.h"
-#include <stdlib.h>
-#include <unistd.h>
+#ifndef FT_FORK_H
+# define FT_FORK_H
 
-void	ft_clean_fds(t_cmd *cmd)
-{
-	if (cmd->in_fd != -1 && cmd->in_fd != 0)
-		close(cmd->in_fd);
-	if (cmd->out_fd != -1 && cmd->out_fd != 1)
-		close(cmd->out_fd);
-	if (cmd->out_pipe_fd != -1)
-		close(cmd->out_pipe_fd);
-}
+# include "struct_philo.h"
+# include "exit_code.h"
+# include <pthread.h>
+# include <stdio.h>
+# include "ft_time.h"
+# include <unistd.h>
 
-void	ft_clean_darray(char **trash)
-{
-	int	i;
+int ft_is_my_turn(t_philo *philo);
+int ft_fork_left(t_philo *philo);
+int ft_fork_right(t_philo *philo);
+int ft_think(t_philo *philo);
+int usleep_alt(t_philo *philo);
 
-	i = 0;
-	while (trash[i])
-	{
-		free(trash[i]);
-		i++;
-	}
-	free(trash);
-}
+#endif
