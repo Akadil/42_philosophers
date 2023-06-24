@@ -6,7 +6,7 @@
 /*   By: akalimol <akalimol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 11:20:57 by akalimol          #+#    #+#             */
-/*   Updated: 2023/06/21 23:28:00 by akalimol         ###   ########.fr       */
+/*   Updated: 2023/06/24 17:12:16 by akalimol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,6 @@ void    ft_connect_first_last(t_philo *philo)
 {
     t_philo *last;
 
-    pthread_mutex_init(&philo->rules->time_of_day, NULL);
-    pthread_mutex_init(&philo->rules->time_available, NULL);
-    pthread_mutex_init(&philo->rules->my_turn, NULL);
     if (!philo)
         return ;
     last = ft_lstlast_alt(philo);

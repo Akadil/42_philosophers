@@ -6,7 +6,7 @@
 /*   By: akalimol <akalimol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 16:28:34 by akalimol          #+#    #+#             */
-/*   Updated: 2023/06/21 22:17:06 by akalimol         ###   ########.fr       */
+/*   Updated: 2023/06/22 12:02:43 by akalimol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void    ft_handle_error(t_philo *philo)
 			return ;
 		}
 		philo->time_curr = philo->time_curr - philo->rules->time_start;
-		printf("%dms %d died", philo->time_curr, philo->num);
+		printf("[%7dms] %d died\n", philo->time_curr, philo->num);
 	}
 	else if (philo->exit_code == -2)
 		ft_perror_d(philo->num);

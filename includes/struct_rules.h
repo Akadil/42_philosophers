@@ -6,7 +6,7 @@
 /*   By: akalimol <akalimol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 10:44:52 by akalimol          #+#    #+#             */
-/*   Updated: 2023/06/21 23:27:33 by akalimol         ###   ########.fr       */
+/*   Updated: 2023/06/24 17:11:48 by akalimol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,6 @@ typedef struct s_rules
 
     int             time_start;
     int             status_code;
-    pthread_mutex_t time_of_day;
-    pthread_mutex_t time_available;
-    pthread_mutex_t my_turn;
 }                   t_rules;
 
 #endif

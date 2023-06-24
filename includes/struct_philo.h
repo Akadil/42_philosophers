@@ -6,7 +6,7 @@
 /*   By: akalimol <akalimol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 11:22:57 by akalimol          #+#    #+#             */
-/*   Updated: 2023/06/21 20:28:37 by akalimol         ###   ########.fr       */
+/*   Updated: 2023/06/24 17:11:03 by akalimol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define STRUCT_PHILO_H
 
 #include <pthread.h>
+#include <sys/time.h>
 #include "struct_rules.h"
 
 /*
@@ -21,6 +22,7 @@
         0 - is thinking
         1 - is eating
         2 - is sleeping
+        3 - took one fork
 */
 typedef struct s_philo
 {
@@ -37,7 +39,12 @@ typedef struct s_philo
     int             status;
     int             success;
     int             exit_code;
+
+    int             iter;
+    int             host;
     
+    struct timeval  timeval;
+
     struct s_philo  *next;
     struct s_philo  *prev;
 }                   t_philo;

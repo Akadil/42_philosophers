@@ -6,7 +6,7 @@
 /*   By: akalimol <akalimol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 17:40:06 by akadilkalim       #+#    #+#             */
-/*   Updated: 2023/06/21 20:46:56 by akalimol         ###   ########.fr       */
+/*   Updated: 2023/06/24 17:15:03 by akalimol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,3 +30,7 @@ int main(int argc, char **argv)
     }
     return (ft_close_threads(philo, &rules, i));
 }
+
+/*
+    Add a new schedule
+*/

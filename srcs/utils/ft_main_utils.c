@@ -6,7 +6,7 @@
 /*   By: akalimol <akalimol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 17:27:09 by akalimol          #+#    #+#             */
-/*   Updated: 2023/06/21 23:28:49 by akalimol         ###   ########.fr       */
+/*   Updated: 2023/06/24 17:11:45 by akalimol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,6 @@ int    ft_close_threads(t_philo *philo, t_rules *rules, int pos)
     philo->prev = NULL;
     temp = philo;
     ft_clean_alt(philo, pos);
-    pthread_mutex_destroy(&rules->time_of_day);
-    pthread_mutex_destroy(&rules->time_available);
-    pthread_mutex_destroy(&rules->my_turn);
     if (rules->status_code == 0)
         return (0);
     else if (rules->status_code == -1)
