@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_error_1.c                                       :+:      :+:    :+:   */
+/*   ft_error.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akalimol <akalimol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 15:30:15 by akalimol          #+#    #+#             */
-/*   Updated: 2023/06/21 17:57:19 by akalimol         ###   ########.fr       */
+/*   Updated: 2023/06/26 23:53:40 by akalimol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,12 @@
 void	ft_error(void)
 {
 	ft_printf2("%s\n", strerror(errno));
+}
+
+void	ft_error_exit(void)
+{
+	ft_error();
+	exit(-1);
 }
 
 void	ft_error_clean_exit(t_philo *philo)

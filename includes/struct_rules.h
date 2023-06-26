@@ -6,7 +6,7 @@
 /*   By: akalimol <akalimol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 10:44:52 by akalimol          #+#    #+#             */
-/*   Updated: 2023/06/24 17:11:48 by akalimol         ###   ########.fr       */
+/*   Updated: 2023/06/26 20:33:17 by akalimol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_rules
     int             num_success;
 
     int             time_start;
+    pthread_mutex_t exit;
     int             status_code;
 }                   t_rules;
 

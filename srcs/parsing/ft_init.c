@@ -6,39 +6,40 @@
 /*   By: akalimol <akalimol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 11:20:57 by akalimol          #+#    #+#             */
-/*   Updated: 2023/06/24 17:12:16 by akalimol         ###   ########.fr       */
+/*   Updated: 2023/06/26 22:49:22 by akalimol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/ft_init.h"
+#include <string.h>
 
 t_philo *ft_init(t_rules *rules)
 {
+    t_philo *philos;
     t_philo *philo;
-    t_philo *temp;
     int     i;
 
-    philo = NULL;
+    philos = NULL;
     i = 0;
     while (i < rules->num_philo)
     {
-        temp = (t_philo *)malloc(sizeof(t_philo));
-        if (!temp)
-            return (ft_error_clean_exit(philo), NULL);
-        if (pthread_mutex_init(&temp->mutex, NULL) != 0)
-            return (free (temp), ft_error_clean_exit(philo), NULL);
-        temp->num = i + 1;
-        temp->round = 1;
-        temp->prev = NULL;
-        temp->next = NULL;
-        temp->status = 0;
-        temp->success = rules->num_success;
-        temp->rules = rules;
-        ft_lstadd_back_alt(&philo, temp);
+        philo = (t_philo *)malloc(sizeof(t_philo));
+        if (!philo)
+            return (ft_error_clean_exit(philos), NULL);
+        memset(philo, 0, sizeof(t_philo));
+        if (pthread_mutex_init(&philo->fork, NULL) != 0)
+            return (free (philo), ft_error_clean_exit(philos), NULL);
+        if (pthread_mutex_init(&philo->exit, NULL) != 0)
+            return (free (philo), ft_error_clean_exit(philos), NULL);     // this one is wrong cleaning
+        philo->num = i + 1;
+        philo->success = rules->num_success;
+        philo->rules = rules;
+        philo->time_eat = rules->time_start;
+        ft_lstadd_back_alt(&philos, philo);
         i++;
     }
-    ft_connect_first_last(philo);
-    return (philo);
+    ft_connect_first_last(philos);
+    return (philos);
 }
 
 void    ft_connect_first_last(t_philo *philo)

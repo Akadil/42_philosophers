@@ -6,7 +6,7 @@
 /*   By: akalimol <akalimol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 15:30:59 by akalimol          #+#    #+#             */
-/*   Updated: 2023/06/21 17:24:44 by akalimol         ###   ########.fr       */
+/*   Updated: 2023/06/26 23:52:37 by akalimol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_clean(t_philo *philo)
 	while (philo)
 	{
 		temp = philo->next;
-		pthread_mutex_destroy(&philo->mutex);
+		pthread_mutex_destroy(&philo->fork);
 		free (philo);
 		philo = temp;
 	}
@@ -37,7 +37,7 @@ void	ft_clean_alt(t_philo *philo, int pos)
 	{
 		temp = philo->next;
 		if (i < pos)
-			pthread_mutex_destroy(&philo->mutex);
+			pthread_mutex_destroy(&philo->fork);
 		free (philo);
 		philo = temp;
 		i++;

@@ -1,31 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_error.h                                         :+:      :+:    :+:   */
+/*   ft_check_status.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akalimol <akalimol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/20 16:36:44 by akalimol          #+#    #+#             */
-/*   Updated: 2023/06/26 22:41:50 by akalimol         ###   ########.fr       */
+/*   Created: 2023/06/26 23:48:50 by akalimol          #+#    #+#             */
+/*   Updated: 2023/06/26 23:49:28 by akalimol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_ERROR_H
-# define FT_ERROR_H
+#include <pthread.h>
+#include "struct_philo.h"
 
-# include "struct_philo.h"
-
-void    ft_error(void);
-void    ft_error_exit(void);
-void	ft_error_clean_exit(t_philo *philo);
-
-void    ft_perror(char *str);
-void	ft_perror_d(int num);
-
-void    ft_merror(char *str, char *param);
-void	ft_merror_exit(char *str, char *param);;
-
-void    ft_merror_d(char *str, int num);
-void	ft_merror_d_exit(char *str, int param);
-
-#endif
+int ft_check_status(t_philo *philo)
+{
+    pthread_mutex_lock(&philo->exit);
+    if (philo->exit_global != 0)
+    {
+        pthread_mutex_unlock(&philo->exit);
+        philo->exit_code = -3;
+        return (-1);
+    }
+    pthread_mutex_unlock(&philo->exit);
+    return (0);
+}

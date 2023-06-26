@@ -6,39 +6,40 @@
 /*   By: akalimol <akalimol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 16:08:38 by akalimol          #+#    #+#             */
-/*   Updated: 2023/06/22 12:43:51 by akalimol         ###   ########.fr       */
+/*   Updated: 2023/06/27 00:28:56 by akalimol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/ft_sleep.h"
 #include "struct_philo.h"
 
+int ft_gettime_sleep(t_philo *philo)
+{
+	// printf("%d: %d\n", philo->num, philo->time_curr);
+	// printf("%d: %d\n", philo->num, philo->rules->time_eat * 1000);
+	// printf("%d: %d\n", philo->num, philo->rules->time_start);
+    return (philo->time_curr - philo->rules->time_start);
+}
+
+int ft_gettime_think(t_philo *philo)
+{
+    return (philo->time_curr - philo->rules->time_start);
+}
 
 int ft_sleep(t_philo *philo)
 {
-    philo->status = 2;
-    philo->exit_code = ft_time_available(philo);
-    if (philo->exit_code < 0)
-        return (philo->exit_code);
-    if (philo->time_live - philo->rules->time_sleep < 0)
-    {
-        philo->time_skip = philo->time_live * 1000;
-        philo->exit_code = usleep_alt(philo); 
-        if (philo->exit_code != 0)
-            return (philo->exit_code);
-        return (-1);
-    }
-    else
-    {
-        philo->exit_code = ft_get_time(philo);
-        if (philo->exit_code != 0)
-            return (philo->exit_code);
-        philo->time_curr = philo->time_curr - philo->rules->time_start;
-        printf("[%7dms] %d is sleeping\n", philo->time_curr, philo->num);
-        philo->time_skip = philo->rules->time_sleep * 1000;
-        philo->exit_code = usleep_alt(philo); 
-        if (philo->exit_code != 0)
-            return (philo->exit_code);
-    }
-    return (0);
+	if (ft_get_time(philo) != 0)
+		return (-1);
+	if (ft_check_status(philo) != 0)
+		return (-1);
+	printf("[%7dms] %d is sleeping\n", ft_gettime_sleep(philo), philo->num);
+	philo->time_skip = philo->rules->time_sleep * 1000;
+	if (usleep_alt(philo) != 0)
+		return (-1);
+	if (ft_get_time(philo) != 0)
+		return (-1);
+	if (ft_check_status(philo) != 0)
+		return (-1);
+	printf("[%7dms] %d is thinking\n", ft_gettime_think(philo), philo->num);
+	return (0);
 }

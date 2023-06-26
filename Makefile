@@ -10,10 +10,10 @@ SRCS			=	ft_main.c \
 					routine/ft_eat.c \
 					routine/ft_fork.c \
 					routine/ft_sleep.c \
-					routine/ft_think.c \
 					routine/ft_time.c \
 					routine/utils/ft_usleep_alt.c \
 					routine/utils/ft_routine_utils.c \
+					routine/utils/ft_check_status.c \
 					utils/ft_error.c \
 					utils/ft_clean.c \
 					utils/ft_main_utils.c
@@ -28,13 +28,13 @@ OBJS			:= $(OBJS:%.c=%.o)
 SRCS			:= $(addprefix $(SRCS_DIR)/, $(SRCS))
 
 CC				= cc
-CFLAGS          = -Wall -Werror -Wextra
+CFLAGS          = -Wall -Werror -Wextra #-fsanitize=thread
 HFLAGS			= -I $(INCLUDES_DIR)
 
 all						: ${NAME}
 
 ${NAME}         		: ${OBJS}
-			${CC} $(OBJS) -o $(NAME) -Llibft -lft -pthread
+			${CC} $(OBJS) -o $(NAME) -Llibft -lft -pthread 
 
 ${BUILD_DIR}/%.o		: $(SRCS_DIR)/%.c $(LIBFT_DIR)/$(LIBFT)
 			${CC} -g3 $(HFLAGS) ${CFLAGS} -c $< -o $@ 

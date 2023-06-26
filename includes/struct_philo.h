@@ -6,7 +6,7 @@
 /*   By: akalimol <akalimol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 11:22:57 by akalimol          #+#    #+#             */
-/*   Updated: 2023/06/24 17:11:03 by akalimol         ###   ########.fr       */
+/*   Updated: 2023/06/26 23:27:53 by akalimol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 typedef struct s_philo
 {
     pthread_t       id;
-    pthread_mutex_t mutex;
+    pthread_mutex_t fork;
     t_rules         *rules;
 
     int             num;
@@ -35,14 +35,11 @@ typedef struct s_philo
     int             time_curr;
     int             time_live;
     int             time_skip;
-    int             round;
-    int             status;
     int             success;
     int             exit_code;
+    int             exit_global;
+    pthread_mutex_t exit;
 
-    int             iter;
-    int             host;
-    
     struct timeval  timeval;
 
     struct s_philo  *next;

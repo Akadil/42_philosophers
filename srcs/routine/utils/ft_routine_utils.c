@@ -6,7 +6,7 @@
 /*   By: akalimol <akalimol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 16:28:34 by akalimol          #+#    #+#             */
-/*   Updated: 2023/06/22 12:02:43 by akalimol         ###   ########.fr       */
+/*   Updated: 2023/06/26 23:44:42 by akalimol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,55 @@
 #include "ft_error.h"
 #include <stdio.h>
 
-void    ft_set_status(t_philo *philo, int exit_code)
-{
-    philo->rules->status_code = exit_code;
-}
+void	ft_set_all_statuses(t_philo *philo);
 
 void    ft_handle_error(t_philo *philo)
 {
-	philo->rules->status_code = philo->exit_code;
+	pthread_mutex_lock(&philo->rules->exit);
+	if (philo->exit_global == -1)
+	{
+		pthread_mutex_unlock(&philo->rules->exit);
+		return ;
+	}
+	ft_set_all_statuses(philo);
 	if (philo->exit_code == -1)
 	{
 		if (ft_get_time(philo) != 0)
 		{
 			ft_perror_d(philo->num);
+			pthread_mutex_unlock(&philo->rules->exit);
 			return ;
 		}
-		philo->time_curr = philo->time_curr - philo->rules->time_start;
-		printf("[%7dms] %d died\n", philo->time_curr, philo->num);
+		printf("[%7dms] %d died\n", philo->time_curr - philo->rules->time_start, philo->num);
 	}
-	else if (philo->exit_code == -2)
+	else
 		ft_perror_d(philo->num);
+	pthread_mutex_unlock(&philo->rules->exit);
+}
+
+void	ft_set_all_statuses(t_philo *philo)
+{
+	int	i;
+
+	i = 0;
+	while (i < philo->rules->num_philo)
+	{
+		pthread_mutex_lock(&philo->exit);
+		philo = philo->next;
+		i++;
+	}
+	i = 0;
+	while (i < philo->rules->num_philo)
+	{
+		philo->exit_global = -1;
+		philo = philo->next;
+		i++;
+	}
+	i = 0;
+	while (i < philo->rules->num_philo)
+	{
+		pthread_mutex_unlock(&philo->exit);
+		philo = philo->next;
+		i++;
+	}
 }

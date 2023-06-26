@@ -6,7 +6,7 @@
 /*   By: akalimol <akalimol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 10:56:37 by akalimol          #+#    #+#             */
-/*   Updated: 2023/06/24 17:23:50 by akalimol         ###   ########.fr       */
+/*   Updated: 2023/06/26 23:42:42 by akalimol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,11 @@ void    ft_parsing(int argc, char **argv, t_rules *rules)
     ft_parsing_time_to_sleep(argv, rules);
     ft_parsing_num_success(argc, argv, rules);
     rules->status_code = 0;
-
+    if (rules->time_die <= rules->time_eat + rules->time_sleep)
+        ft_merror_exit("Wrong time inputs! t_die > t_eat + t_sleep\n", NULL);
     if (gettimeofday(&timeval, NULL) != 0)
-        printf("erorr");
+        ft_error_exit();
+    if (pthread_mutex_init(&rules->exit, NULL) != 0)
+        ft_error_exit();
     rules->time_start = ((timeval.tv_sec + 3) * 1000 % 100000000) + (timeval.tv_usec / 1000);
-    // Add some extra rules like Alexi said
 }

@@ -6,7 +6,7 @@
 /*   By: akalimol <akalimol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 16:21:42 by akalimol          #+#    #+#             */
-/*   Updated: 2023/06/21 20:27:52 by akalimol         ###   ########.fr       */
+/*   Updated: 2023/06/26 23:50:39 by akalimol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,6 @@ int ft_fork_left(t_philo *philo);
 int ft_fork_right(t_philo *philo);
 int ft_think(t_philo *philo);
 int usleep_alt(t_philo *philo);
+int ft_check_status(t_philo *philo);
 
 #endif
