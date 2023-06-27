@@ -33,9 +33,9 @@ void	ft_set_all_statuses2(t_philo *philo, int ind)
 	while (i < philo->rules->num_philo)
 	{
         if (ind == i)
-    		philo->exit_global = -1;
+    		philo->exit_global = -2;
         else
-            philo->exit_global = -2;
+            philo->exit_global = -1;
 		philo = philo->next;
 		i++;
 	}
