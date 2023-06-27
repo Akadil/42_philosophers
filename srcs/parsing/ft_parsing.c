@@ -6,7 +6,7 @@
 /*   By: akalimol <akalimol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 10:56:37 by akalimol          #+#    #+#             */
-/*   Updated: 2023/06/26 23:42:42 by akalimol         ###   ########.fr       */
+/*   Updated: 2023/06/27 14:02:29 by akalimol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,5 @@ void    ft_parsing(int argc, char **argv, t_rules *rules)
         ft_error_exit();
     if (pthread_mutex_init(&rules->exit, NULL) != 0)
         ft_error_exit();
-    rules->time_start = ((timeval.tv_sec + 3) * 1000 % 100000000) + (timeval.tv_usec / 1000);
+    rules->time_start = ((timeval.tv_sec + 3) * 1000) + (timeval.tv_usec / 1000);
 }

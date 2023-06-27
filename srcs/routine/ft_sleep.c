@@ -6,12 +6,13 @@
 /*   By: akalimol <akalimol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 16:08:38 by akalimol          #+#    #+#             */
-/*   Updated: 2023/06/27 00:28:56 by akalimol         ###   ########.fr       */
+/*   Updated: 2023/06/27 15:24:46 by akalimol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/ft_sleep.h"
 #include "struct_philo.h"
+#include <unistd.h>
 
 int ft_gettime_sleep(t_philo *philo)
 {
@@ -34,7 +35,7 @@ int ft_sleep(t_philo *philo)
 		return (-1);
 	printf("[%7dms] %d is sleeping\n", ft_gettime_sleep(philo), philo->num);
 	philo->time_skip = philo->rules->time_sleep * 1000;
-	if (usleep_alt(philo) != 0)
+	if (usleep(philo->time_skip) != 0)
 		return (-1);
 	if (ft_get_time(philo) != 0)
 		return (-1);

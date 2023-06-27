@@ -28,13 +28,13 @@ OBJS			:= $(OBJS:%.c=%.o)
 SRCS			:= $(addprefix $(SRCS_DIR)/, $(SRCS))
 
 CC				= cc
-CFLAGS          = -Wall -Werror -Wextra #-fsanitize=thread
+CFLAGS          = -Wall -Werror -Wextra -fsanitize=thread
 HFLAGS			= -I $(INCLUDES_DIR)
 
 all						: ${NAME}
 
 ${NAME}         		: ${OBJS}
-			${CC} $(OBJS) -o $(NAME) -Llibft -lft -pthread 
+			${CC} $(OBJS) -o $(NAME) -Llibft -lft -pthread -ltsan
 
 ${BUILD_DIR}/%.o		: $(SRCS_DIR)/%.c $(LIBFT_DIR)/$(LIBFT)
 			${CC} -g3 $(HFLAGS) ${CFLAGS} -c $< -o $@ 

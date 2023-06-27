@@ -6,7 +6,7 @@
 /*   By: akalimol <akalimol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 11:20:57 by akalimol          #+#    #+#             */
-/*   Updated: 2023/06/26 22:49:22 by akalimol         ###   ########.fr       */
+/*   Updated: 2023/06/27 19:16:50 by akalimol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ t_philo *ft_init(t_rules *rules)
             return (free (philo), ft_error_clean_exit(philos), NULL);
         if (pthread_mutex_init(&philo->exit, NULL) != 0)
             return (free (philo), ft_error_clean_exit(philos), NULL);     // this one is wrong cleaning
+        if (pthread_mutex_init(&philo->meal, NULL) != 0)
+            return (free (philo), ft_error_clean_exit(philos), NULL);
         philo->num = i + 1;
         philo->success = rules->num_success;
         philo->rules = rules;
