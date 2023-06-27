@@ -26,7 +26,6 @@ void    ft_handle_error(t_philo *philo)
 		pthread_mutex_unlock(&philo->rules->exit);
 		return ;
 	}
-	ft_set_all_statuses(philo);
 	if (philo->exit_code == -1)
 	{
 		if (ft_get_time(philo) != 0)
@@ -38,7 +37,10 @@ void    ft_handle_error(t_philo *philo)
 		printf("[%7dms] %d died\n", philo->time_curr - philo->rules->time_start, philo->num);
 	}
 	else
+	{
+		ft_set_all_statuses(philo);
 		ft_perror_d(philo->num);
+	}
 	pthread_mutex_unlock(&philo->rules->exit);
 }
 
