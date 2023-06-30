@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_parsing.h                                       :+:      :+:    :+:   */
+/*   ft_monitor.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akalimol <akalimol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/21 16:09:34 by akalimol          #+#    #+#             */
-/*   Updated: 2023/06/28 12:47:48 by akalimol         ###   ########.fr       */
+/*   Created: 2023/06/30 16:38:50 by akalimol          #+#    #+#             */
+/*   Updated: 2023/06/30 19:17:05 by akalimol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PARSING_H
-# define FT_PARSING_H
+#ifndef FT_MONITOR_H
+# define FT_MONITOR_H
 
-# include "ft_error.h"
-# include "libft.h"
-# include "struct_rules.h"
+# include "struct_philo.h"
+# include <pthread.h>
 # include <stdio.h>
+# include <sys/time.h>
+# include <unistd.h>
 
-void	ft_parsing_num_philo(char **argv, t_rules *rules);
-void	ft_parsing_time_to_die(char **argv, t_rules *rules);
-void	ft_parsing_time_to_eat(char **argv, t_rules *rules);
-void	ft_parsing_time_to_sleep(char **argv, t_rules *rules);
-void	ft_parsing_num_success(int argc, char **argv, t_rules *rules);
+int		ft_is_game_finished(t_philo *philo);
+void	ft_set_all_statuses_2(t_philo *philo);
+int		ft_check_death(t_philo *philo, t_rules *rules, int time);
 
 #endif

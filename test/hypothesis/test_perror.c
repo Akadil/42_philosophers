@@ -1,23 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_think.h                                         :+:      :+:    :+:   */
+/*   test_perror.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akalimol <akalimol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/21 16:22:23 by akalimol          #+#    #+#             */
-/*   Updated: 2023/06/26 23:50:52 by akalimol         ###   ########.fr       */
+/*   Created: 2023/06/30 15:19:42 by akalimol          #+#    #+#             */
+/*   Updated: 2023/06/30 15:24:06 by akalimol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_THINK_H
-# define FT_THINK_H
+#include <stdio.h>
+#include <fcntl.h>
 
-# include "struct_philo.h"
-# include "ft_time.h"
-# include <stdio.h>
+/*
+    Hypothesis:     What will be the output if I pass NULL to perror function
 
-int usleep_alt(t_philo *philo);
-int ft_check_status(t_philo *philo);
+    Result:         That's true. If NULL, then no ":" in it
+*/
 
-#endif
+int main(void)
+{
+    int fd;
+
+    fd = open("I_DONT_EXIST", O_RDONLY);
+    if (fd == -1)
+        perror(NULL);
+    else
+        printf("Something was wrong!\n");
+}

@@ -6,25 +6,21 @@
 /*   By: akalimol <akalimol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 23:48:50 by akalimol          #+#    #+#             */
-/*   Updated: 2023/06/27 16:21:56 by akalimol         ###   ########.fr       */
+/*   Updated: 2023/06/30 15:26:12 by akalimol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <pthread.h>
 #include "struct_philo.h"
+#include <pthread.h>
 
-int ft_check_status(t_philo *philo)
+int	ft_check_status(t_philo *philo)
 {
-    pthread_mutex_lock(&philo->exit);
-    if (philo->exit_global != 0)
-    {
-        if (philo->exit_global == -1)
-            philo->exit_code = -3;
-        else
-            philo->exit_code = -1;
-        pthread_mutex_unlock(&philo->exit);   
-        return (-1);
-    }
-    pthread_mutex_unlock(&philo->exit);
-    return (0);
+	pthread_mutex_lock(&philo->exit);
+	if (philo->exit_code != 0)
+	{
+		pthread_mutex_unlock(&philo->exit);
+		return (-1);
+	}
+	pthread_mutex_unlock(&philo->exit);
+	return (0);
 }

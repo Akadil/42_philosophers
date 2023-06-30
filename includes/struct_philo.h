@@ -6,7 +6,7 @@
 /*   By: akalimol <akalimol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 11:22:57 by akalimol          #+#    #+#             */
-/*   Updated: 2023/06/28 12:48:36 by akalimol         ###   ########.fr       */
+/*   Updated: 2023/06/30 16:43:56 by akalimol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,9 @@ typedef struct s_philo
 	int				num_meal;
 	int				time_eat;
 	int				time_curr;
-	int				time_live;
-	int				time_skip;
-	int				success;
 	int				exit_code;
-	int				exit_global;
 
-	int				iter;
-	int				host;
-
-	struct timeval	timeval;
-
+	struct timeval	tv;
 	struct s_philo	*next;
 	struct s_philo	*prev;
 }					t_philo;

@@ -6,13 +6,13 @@
 /*   By: akalimol <akalimol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 15:30:59 by akalimol          #+#    #+#             */
-/*   Updated: 2023/06/26 23:52:37 by akalimol         ###   ########.fr       */
+/*   Updated: 2023/06/28 12:44:29 by akalimol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "struct_philo.h"
-#include <stdlib.h>
 #include <pthread.h>
+#include <stdlib.h>
 
 void	ft_clean(t_philo *philo)
 {
@@ -22,7 +22,7 @@ void	ft_clean(t_philo *philo)
 	{
 		temp = philo->next;
 		pthread_mutex_destroy(&philo->fork);
-		free (philo);
+		free(philo);
 		philo = temp;
 	}
 }
@@ -38,7 +38,7 @@ void	ft_clean_alt(t_philo *philo, int pos)
 		temp = philo->next;
 		if (i < pos)
 			pthread_mutex_destroy(&philo->fork);
-		free (philo);
+		free(philo);
 		philo = temp;
 		i++;
 	}

@@ -1,37 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lst_alt.c                                       :+:      :+:    :+:   */
+/*   time.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akalimol <akalimol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/21 15:17:42 by akalimol          #+#    #+#             */
-/*   Updated: 2023/06/28 12:47:16 by akalimol         ###   ########.fr       */
+/*   Created: 2023/06/21 16:34:25 by akalimol          #+#    #+#             */
+/*   Updated: 2023/06/30 15:40:25 by akalimol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "struct_philo.h"
-#include <stdio.h>
+#ifndef TIME_H
+# define TIME_H
 
-t_philo	*ft_lstlast_alt(t_philo *philo)
-{
-	if (!philo)
-		return (NULL);
-	while (philo->next)
-		philo = philo->next;
-	return (philo);
-}
+# include "struct_philo.h"
 
-void	ft_lstadd_back_alt(t_philo **head, t_philo *philo)
-{
-	t_philo	*last;
+int	ft_update_time(t_philo *philo);
+void	ft_update_time_last_meal(t_philo *philo);
+int	ft_get_time(t_philo *philo);
 
-	last = ft_lstlast_alt(*head);
-	if (!last)
-		*head = philo;
-	else
-	{
-		last->next = philo;
-		philo->prev = last;
-	}
-}
+#endif

@@ -6,67 +6,42 @@
 /*   By: akalimol <akalimol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 16:28:34 by akalimol          #+#    #+#             */
-/*   Updated: 2023/06/26 23:44:42 by akalimol         ###   ########.fr       */
+/*   Updated: 2023/06/30 19:27:50 by akalimol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../includes/time.h"
 #include "struct_philo.h"
-#include "libft.h"
-#include "../includes/ft_time.h"
-#include "ft_error.h"
-#include <stdio.h>
+#include <unistd.h>
+#include <pthread.h>
 
-void	ft_set_all_statuses(t_philo *philo);
-
-void    ft_handle_error(t_philo *philo)
+void	ft_handle_one_philo(t_philo *philo)
 {
-	pthread_mutex_lock(&philo->rules->exit);
-	if (philo->exit_global == -1)
-	{
-		pthread_mutex_unlock(&philo->rules->exit);
-		return ;
-	}
-	if (philo->exit_code == -1)
-	{
-		if (ft_get_time(philo) != 0)
-		{
-			ft_perror_d(philo->num);
-			pthread_mutex_unlock(&philo->rules->exit);
-			return ;
-		}
-		printf("[%7dms] %d died\n", philo->time_curr - philo->rules->time_start, philo->num);
-	}
-	else
-	{
-		ft_set_all_statuses(philo);
-		ft_perror_d(philo->num);
-	}
-	pthread_mutex_unlock(&philo->rules->exit);
+	usleep(philo->rules->time_die * 1000 + 1000);
 }
 
-void	ft_set_all_statuses(t_philo *philo)
-{
-	int	i;
+#include <stdio.h>
 
-	i = 0;
-	while (i < philo->rules->num_philo)
+int	ft_start_schedule(t_philo *philo)
+{
+	if (ft_update_time(philo) != 0)
 	{
-		pthread_mutex_lock(&philo->exit);
-		philo = philo->next;
-		i++;
+		philo->exit_code = -2;
+		return (-1);
 	}
-	i = 0;
-	while (i < philo->rules->num_philo)
-	{
-		philo->exit_global = -1;
-		philo = philo->next;
-		i++;
-	}
-	i = 0;
-	while (i < philo->rules->num_philo)
-	{
-		pthread_mutex_unlock(&philo->exit);
-		philo = philo->next;
-		i++;
-	}
+	printf("%d", (philo->time_eat - philo->time_curr) * 1000);
+	usleep((philo->time_eat - philo->time_curr) * 1000);
+	if (philo->num % 2 == 0)
+		usleep(philo->rules->time_sleep * 1000);
+	if (philo->rules->num_philo % 2 == 1)
+		if (philo->num == philo->rules->num_philo)
+			usleep(1000);
+	return (0);
+}
+
+void	ft_set_end_status(t_philo *philo)
+{
+	pthread_mutex_lock(&philo->exit);
+	philo->exit_code = -4;
+	pthread_mutex_unlock(&philo->exit);
 }
